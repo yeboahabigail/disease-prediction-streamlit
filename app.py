@@ -93,30 +93,24 @@ if 'page' not in st.session_state:
     st.session_state.page = 'Home'
 
 # Load the trained model and preprocessors
+import pickle 
 @st.cache_resource
 def load_model():
-    """
-    Load the trained Random Forest model, scaler, and label encoder.
-    
-    Returns:
-        tuple: (model, scaler, label_encoder)
-    
-    Raises:
-        FileNotFoundError: If any required model file is missing
-    """
-    try:
-        model = joblib.load(open('Random_Forest_model.pkl', 'rb'))
-        scaler = joblib.load(open('scaler.pkl', 'rb'))
-        label_encoder = joblib.load(open('label_encoder.pkl', 'rb'))
+    try: 
+        with open('Random_Forest_model.pkl', 'rb') as f: 
+             model = pickle.load(f) 
+        with open('scaler.pkl', 'rb') as f: 
+             scaler = pickle.load(f)
+        with open('label_encoder.pkl', 'rb') as f: 
+             label_encoder = pickle.load(f) 
         return model, scaler, label_encoder
-    except FileNotFoundError as e:
-        st.error(f"❌ Error loading model files: {e}")
-        st.info("Please ensure the following files are in the same directory as app.py:")
-        st.code("- Random_Forest_model.pkl\n- scaler.pkl\n- label_encoder.pkl")
+    except FileNotFoundError as e: 
+        st.error(f"❌ Error loading model files: {e}") 
+        st.info("Please ensure the following files are in the same directory as app.py:") 
+        st.code("- Random_Forest_model.pkl\n- scaler.pkl\n- label_encoder.pkl") 
         st.stop()
-
-# Load models
-model, scaler, label_encoder = load_model()
+# Load modelss
+model, scaler, label_encoder = load_model()s
 
 # Sidebar Navigation
 with st.sidebar:
