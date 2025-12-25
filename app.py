@@ -4,7 +4,7 @@ A Streamlit web application for predicting diseases based on symptoms and enviro
 """
 
 import streamlit as st
-import joblib
+import pickle
 import numpy as np
 import pandas as pd
 import plotly.express as px
@@ -110,7 +110,8 @@ def load_model():
         st.code("- Random_Forest_model.pkl\n- scaler.pkl\n- label_encoder.pkl") 
         st.stop()
 # Load modelss
-model, scaler, label_encoder = load_model()s
+
+model, scaler, label_encoder = load_model()
 
 # Sidebar Navigation
 with st.sidebar:
